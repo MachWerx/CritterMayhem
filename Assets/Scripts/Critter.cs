@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class Critter : MonoBehaviour {
     [SerializeField] private InputManager _inputManager;
+    [SerializeField] private TrailRenderer _trail;
 
     private float kDistanceGoal = 0.15f;
+    private Material _material;
 
     // Start is called before the first frame update
     void Start() {
-
+        _material = GetComponent<MeshRenderer>().material;
+        _trail = GetComponentInChildren<TrailRenderer>();
+        Color bodyColor = _material.color;
+        _trail.startColor = bodyColor;
+        bodyColor.a = 0;
+        _trail.endColor = bodyColor;
     }
 
     // Update is called once per frame
