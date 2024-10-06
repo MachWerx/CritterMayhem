@@ -37,4 +37,10 @@ public class InputManager : MonoBehaviour {
 
         return mousePos;
     }
+
+    public Vector3 mousePos {
+        get {
+            return _mousePosPrev;
+        }
+    }
 }
