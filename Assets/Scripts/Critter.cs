@@ -37,7 +37,7 @@ public class Critter : MonoBehaviour {
         transform.rotation = Quaternion.Slerp(
             transform.rotation,
             Quaternion.FromToRotation(Vector3.forward, targetPos - transform.position),
-            0.01f);
+            1 - Mathf.Pow(0.01f, Time.deltaTime));
 
         transform.position += speed * Time.deltaTime * (transform.rotation * Vector3.forward);
     }
