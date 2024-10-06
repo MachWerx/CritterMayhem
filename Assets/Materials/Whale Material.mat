@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Critter Material
-  m_Shader: {fileID: 4800000, guid: 32787df65144f40c79204eef6a2eadb7, type: 3}
+  m_Name: Whale Material
+  m_Shader: {fileID: 4800000, guid: 000b9fe9107f04d2e9ea1ce5aea8c68e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -78,6 +78,6 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0, g: 0.84300804, b: 1, a: 1}
+    - _Color: {r: 0.1674303, g: 0.16300286, b: 0.31132078, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
