@@ -11,10 +11,36 @@ public class Whale : MonoBehaviour {
     private float _maxSpeed = 0.5f;
     private float _maxTurnSpeed = 10.0f;
 
+    private bool _initialized = false;
+    private float _initialMaxSpeed;
+    private float _initialMaxTurnSpeed;
+    private Vector3 _initialPos;
+    private Quaternion _initialRot;
+
+
     // Start is called before the first frame update
     void Start() {
         _material = _geometry.material;
         //Color bodyColor = _material.color;
+
+        _initialMaxSpeed = _maxSpeed;
+        _initialMaxTurnSpeed = _maxTurnSpeed;
+        _initialPos = transform.position;
+        _initialRot = transform.rotation;
+
+        _initialized = true;
+    }
+
+    public void Reset() {
+        if (!_initialized) {
+            Start();
+        }
+
+        _speed = 0;
+        _maxSpeed = _initialMaxSpeed;
+        _maxTurnSpeed = _initialMaxTurnSpeed;
+        transform.position = _initialPos;
+        transform.rotation = _initialRot;
     }
 
     // Update is called once per frame
@@ -43,7 +69,6 @@ public class Whale : MonoBehaviour {
         float turnSpeed = _maxTurnSpeed * Time.deltaTime * (_maxSpeed - .9f * _speed) / _maxSpeed;
         if (angle < turnSpeed) {
             transform.rotation = targetAngle;
-            Debug.Log("set: " + turnSpeed + " / " + angle + " = ");
         } else {
             transform.rotation = Quaternion.Slerp(
                 transform.rotation,

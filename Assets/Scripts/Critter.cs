@@ -24,11 +24,7 @@ public class Critter : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if ((transform.position - _pearl.transform.position).magnitude < 0.5f * (transform.lossyScale.x + _pearl.transform.lossyScale.x)) {
-            Vector2 newPos = Random.insideUnitCircle;
-            _pearl.transform.position = new Vector3(newPos.x, 0, newPos.y);
-            _gameManager.CreateCritter(transform.position, Quaternion.FromToRotation(Vector3.forward, Random.onUnitSphere));
-        }
+        _pearl.CheckCollision(transform);
 
         if ((transform.position - _whale.transform.position).magnitude < 0.5f * (transform.lossyScale.x + _whale.transform.lossyScale.x)) {
             Destroy(gameObject);
