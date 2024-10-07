@@ -7,8 +7,9 @@ public class Whale : MonoBehaviour {
     [SerializeField] MeshRenderer _geometry;
 
     private Material _material;
+    private float _speed = 0.0f;
     private float _maxSpeed = 0.5f;
-    private float _turnDrag = 0.2f;
+    private float _maxTurnSpeed = 10.0f;
 
     // Start is called before the first frame update
     void Start() {
@@ -20,20 +21,41 @@ public class Whale : MonoBehaviour {
     void Update() {
         Vector3 targetPos = _flock.center;
 
-        Quaternion targetAngle = Quaternion.FromToRotation(Vector3.forward, targetPos - transform.position);
+        Quaternion targetAngle = Quaternion.FromToRotation(Vector3.forward, (targetPos - transform.position).normalized);
         float angle = Quaternion.Angle(transform.rotation, targetAngle);
-        float speed = _maxSpeed / (1.0f + angle / 60.0f);
+        float targetSpeed = angle < 90 ? Mathf.Pow(1 - angle / 90.0f, .5f) : 0;
+        targetSpeed = .1f + .9f * targetSpeed;
+        targetSpeed *= _maxSpeed;
+        float acc = 0.5f;
+        if (_speed < targetSpeed) {
+            _speed += acc * Time.deltaTime;
+            if (_speed > targetSpeed) {
+                _speed = targetSpeed;
+            }
+        } else {
+            _speed -= acc * Time.deltaTime;
+            if (_speed < targetSpeed) {
+                _speed = targetSpeed;
+            }
+        }
+        //float targetSpeed = _maxSpeed / (1.0f + 20.0f * angle / 180.0f);
 
-        transform.rotation = Quaternion.Slerp(
-            transform.rotation,
-            targetAngle,
-            1 - Mathf.Pow(_turnDrag, Time.deltaTime));
+        float turnSpeed = _maxTurnSpeed * Time.deltaTime * (_maxSpeed - .9f * _speed) / _maxSpeed;
+        if (angle < turnSpeed) {
+            transform.rotation = targetAngle;
+            Debug.Log("set: " + turnSpeed + " / " + angle + " = ");
+        } else {
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                targetAngle,
+                turnSpeed / angle);
+        }
 
-        transform.position += speed * Time.deltaTime * (transform.rotation * Vector3.forward);
+        transform.position += _speed * Time.deltaTime * (transform.rotation * Vector3.forward);
     }
 
     public void IncreaseSpeed() {
-        _maxSpeed += .2f;
-        _turnDrag *= 0.9f;
+        _maxSpeed += 0.2f;
+        _maxTurnSpeed += 10.0f;
     }
 }
