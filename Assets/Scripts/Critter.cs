@@ -11,6 +11,7 @@ public class Critter : MonoBehaviour {
 
     private float kDistanceGoal = 0.15f;
     private Material _material;
+    private float _speed = 1.0f;
 
     // Start is called before the first frame update
     void Start() {
@@ -29,7 +30,6 @@ public class Critter : MonoBehaviour {
         if ((transform.position - _whale.transform.position).magnitude < 0.5f * (transform.lossyScale.x + _whale.transform.lossyScale.x)) {
             Destroy(gameObject);
         }
-        float speed = 1.0f;
         float weight = 10.0f;
         Vector3 targetPos = weight * transform.position;
 
@@ -54,6 +54,14 @@ public class Critter : MonoBehaviour {
             Quaternion.FromToRotation(Vector3.forward, targetPos - transform.position),
             1 - Mathf.Pow(0.01f, Time.deltaTime));
 
-        transform.position += speed * Time.deltaTime * (transform.rotation * Vector3.forward);
+        transform.position += _speed * Time.deltaTime * (transform.rotation * Vector3.forward);
+
+        _speed = Mathf.Pow(0.3f, Time.deltaTime) * (_speed - 1.0f) + 1.0f;
+    }
+
+    public void Burst(float speed) {
+        Vector3 newDir = Random.onUnitSphere;
+        transform.rotation = Quaternion.FromToRotation(Vector3.forward, newDir);
+        _speed = speed;
     }
 }

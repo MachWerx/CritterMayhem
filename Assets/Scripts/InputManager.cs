@@ -20,10 +20,11 @@ public class InputManager : MonoBehaviour {
         float velDrag = 0.9f;
         _mouseVel = velDrag * _mouseVel + (1.0f - velDrag) * mouseVelCurrent;
 
-        //if (Input.GetMouseButtonDown(0)) {
-        //    Quaternion forward = Quaternion.FromToRotation(Vector3.forward, _mouseVel);
-        //    _gameManager.CreateCritter(mousePos, forward);
-        //}
+        if (Input.GetMouseButtonDown(0)) {
+            //    Quaternion forward = Quaternion.FromToRotation(Vector3.forward, _mouseVel);
+            //    _gameManager.CreateCritter(mousePos, forward);
+            
+        }
 
         _mousePosPrev = mousePos;
     }

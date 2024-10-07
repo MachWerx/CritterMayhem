@@ -33,4 +33,25 @@ public class Flock : MonoBehaviour {
            _center = newCenter / weight;
         }
     }
+
+    public void Burst() {
+        float count = 0;
+        foreach (Transform critter in transform) {
+            if (!critter.gameObject.activeSelf || critter == this.transform) {
+                continue;
+            }
+
+            count++;
+        }
+
+        foreach (Transform critter in transform) {
+            if (!critter.gameObject.activeSelf || critter == this.transform) {
+                continue;
+            }
+            Critter c = critter.GetComponent<Critter>();
+            c.Burst(1.0f + 0.2f * (count - 1));
+        }
+
+
+    }
 }

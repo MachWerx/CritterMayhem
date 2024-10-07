@@ -1883,8 +1883,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _critterTemplate: {fileID: 1566777004}
+  _flock: {fileID: 312940774}
   _whale: {fileID: 411531784}
-  _pearl: {fileID: 0}
+  _pearl: {fileID: 817535840}
   _scoreText: {fileID: 804880915}
   _gameOverText: {fileID: 2058372771}
 --- !u!4 &1826590574

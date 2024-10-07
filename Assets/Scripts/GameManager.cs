@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
     [SerializeField] private Critter _critterTemplate;
+    [SerializeField] private Flock _flock;
     [SerializeField] private Whale _whale;
     [SerializeField] private Pearl _pearl;
     [SerializeField] private TMPro.TextMeshPro _scoreText;
@@ -37,6 +38,9 @@ public class GameManager : MonoBehaviour {
                 if (count == 0) {
                     _gameOverText.gameObject.SetActive(true);
                     _state = State.GameOver;
+                }
+                if (Input.GetMouseButtonDown(0)) {
+                    _flock.Burst();
                 }
                 break;
             case State.GameOver:
