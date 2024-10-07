@@ -8,6 +8,7 @@ public class Whale : MonoBehaviour {
 
     private Material _material;
     private float _maxSpeed = 0.5f;
+    private float _turnDrag = 0.2f;
 
     // Start is called before the first frame update
     void Start() {
@@ -26,8 +27,13 @@ public class Whale : MonoBehaviour {
         transform.rotation = Quaternion.Slerp(
             transform.rotation,
             targetAngle,
-            1 - Mathf.Pow(0.2f, Time.deltaTime));
+            1 - Mathf.Pow(_turnDrag, Time.deltaTime));
 
         transform.position += speed * Time.deltaTime * (transform.rotation * Vector3.forward);
+    }
+
+    public void IncreaseSpeed() {
+        _maxSpeed += .2f;
+        _turnDrag *= 0.9f;
     }
 }

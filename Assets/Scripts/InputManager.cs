@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour {
-    [SerializeField] private Critter _critterTemplate;
+    [SerializeField] private GameManager _gameManager;
 
     Vector3 _mousePosPrev;
     Vector3 _mouseVel = Vector3.zero;
@@ -22,9 +22,7 @@ public class InputManager : MonoBehaviour {
 
         if (Input.GetMouseButtonDown(0)) {
             Quaternion forward = Quaternion.FromToRotation(Vector3.forward, _mouseVel);
-            Critter newCritter = Instantiate(_critterTemplate, mousePos, forward);
-            newCritter.gameObject.SetActive(true);
-            newCritter.transform.parent = _critterTemplate.transform.parent;
+            _gameManager.CreateCritter(mousePos, forward);
         }
 
         _mousePosPrev = mousePos;
