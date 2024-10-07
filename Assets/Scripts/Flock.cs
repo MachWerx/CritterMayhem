@@ -18,17 +18,19 @@ public class Flock : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         float weight = 0;
-        _center = Vector3.zero;
+        Vector3 newCenter = Vector3.zero;
 
         foreach (Transform critter in transform) {
             if (!critter.gameObject.activeSelf) {
                 continue;
             }
 
-            _center += critter.position;
+            newCenter += critter.position;
             weight += 1;
         }
 
-        _center /= weight;
+        if (weight > 0) {
+           _center = newCenter / weight;
+        }
     }
 }

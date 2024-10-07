@@ -5,6 +5,7 @@ using UnityEngine;
 public class Critter : MonoBehaviour {
     [SerializeField] private InputManager _inputManager;
     [SerializeField] private TrailRenderer _trail;
+    [SerializeField] private Whale _whale;
 
     private float kDistanceGoal = 0.15f;
     private Material _material;
@@ -21,6 +22,9 @@ public class Critter : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        if ((transform.position - _whale.transform.position).magnitude < 0.5f * (transform.lossyScale.x + _whale.transform.lossyScale.x)) {
+            Destroy(gameObject);
+        }
         float speed = 1.0f;
         float weight = 10.0f;
         Vector3 targetPos = weight * transform.position;
