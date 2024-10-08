@@ -8,6 +8,7 @@ public class Critter : MonoBehaviour {
     [SerializeField] private TrailRenderer _trail;
     [SerializeField] private Whale _whale;
     [SerializeField] private Pearl _pearl;
+    [SerializeField] private AudioSource _chompSound;
 
     private float kDistanceGoal = 0.15f;
     private Material _material;
@@ -28,6 +29,7 @@ public class Critter : MonoBehaviour {
         _pearl.CheckCollision(transform);
 
         if ((transform.position - _whale.transform.position).magnitude < 0.5f * (transform.lossyScale.x + _whale.transform.lossyScale.x)) {
+            _chompSound.Play();
             Destroy(gameObject);
         }
         float weight = 10.0f;

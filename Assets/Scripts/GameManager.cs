@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private Pearl _pearl;
     [SerializeField] private TMPro.TextMeshPro _scoreText;
     [SerializeField] private TMPro.TextMeshPro _gameOverText;
+    [SerializeField] private AudioSource _pearlSound;
+    [SerializeField] private AudioSource _burstSound;
 
     enum State {
         Playing,
@@ -40,6 +42,7 @@ public class GameManager : MonoBehaviour {
                     _state = State.GameOver;
                 }
                 if (Input.GetMouseButtonDown(0)) {
+                    _burstSound.Play();
                     _flock.Burst();
                 }
                 break;
@@ -65,6 +68,7 @@ public class GameManager : MonoBehaviour {
         newCritter.transform.parent = _critterTemplate.transform.parent;
 
         _score++;
+        _pearlSound.Play();
 
         _whale.IncreaseSpeed();
     }
