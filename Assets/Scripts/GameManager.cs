@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private Pearl _pearl;
     [SerializeField] private TMPro.TextMeshPro _scoreText;
     [SerializeField] private TMPro.TextMeshPro _gameOverText;
+    [SerializeField] private TMPro.TextMeshPro _startText;
     [SerializeField] private AudioSource _pearlSound;
     [SerializeField] private AudioSource _burstSound;
 
@@ -17,12 +18,12 @@ public class GameManager : MonoBehaviour {
         GameOver
     }
 
-    private State _state = State.Playing;
+    private State _state = State.GameOver;
     private int _score = 0;
 
     // Start is called before the first frame update
     void Start() {
-        ResetGame();
+        //ResetGame();
     }
 
     // Update is called once per frame
@@ -39,6 +40,7 @@ public class GameManager : MonoBehaviour {
                 }
                 if (count == 0) {
                     _gameOverText.gameObject.SetActive(true);
+                    _startText.gameObject.SetActive(true);
                     _state = State.GameOver;
                 }
                 if (Input.GetMouseButtonDown(0)) {
@@ -56,6 +58,7 @@ public class GameManager : MonoBehaviour {
 
     public void ResetGame() {
         _gameOverText.gameObject.SetActive(false);
+        _startText.gameObject.SetActive(false);
         CreateCritter(Vector3.zero, Quaternion.identity);
         _whale.Reset();
         _score = 0;
