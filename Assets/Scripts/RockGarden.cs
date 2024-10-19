@@ -16,6 +16,7 @@ public class RockGarden : MonoBehaviour {
             pos.y = 0;
             rock.transform.localPosition = pos;
             rock.transform.localScale = Random.Range(0.2f, 1.0f) * Vector3.one;
+            rock.gameObject.SetActive(true);
         }
     }
 

@@ -20,7 +20,7 @@ public class RockDeformer : MonoBehaviour {
                 freq *= 2.01f;
                 amp *= 0.5f;
             }
-            verts[i] = verts[i] + noise * norms[i];
+            verts[i] = verts[i] + noise * verts[i].normalized;
         }
 
         _mesh.vertices = verts;
